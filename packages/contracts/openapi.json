@@ -87,7 +87,7 @@
             "type": "string"
           },
           "notice": {
-            "default": "DEMO: fikcyjne miejsca, ceny i trasy. Nie używaj do nawigacji.",
+            "default": "DEMO: fictional places, prices and routes. Do not use for navigation.",
             "title": "Notice",
             "type": "string"
           },
@@ -284,7 +284,7 @@
     }
   },
   "info": {
-    "description": "DEMO: fikcyjne miejsca, ceny i trasy. Nie używaj do nawigacji.",
+    "description": "DEMO: fictional places, prices and routes. Do not use for navigation.",
     "title": "Time to Spare — synthetic demo",
     "version": "0.1.0"
   },

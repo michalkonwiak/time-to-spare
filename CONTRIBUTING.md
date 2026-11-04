@@ -1,6 +1,9 @@
 # Contributing
 
-Run `make bootstrap`, optionally `make hooks`, then `make check` and `make build`.
+Run `make bootstrap`, `make hooks`, then `make check` and `make build`.
+Use English for code, documentation, commits and pull requests.
+Pre-commit checks lint, formatting and types. Pre-push runs checks and the build.
+Changes to dependencies must include `uv.lock`; do not bypass checks to push.
 Use small feature branches and descriptive commits (e.g. `feat(planner): ...`).
 Name branches by purpose: `feat/`, `fix/`, or `docs/`, followed by a short description.
 Explain behavior changes, tests and limitations in PRs. Add regression tests for

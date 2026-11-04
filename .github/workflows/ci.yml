@@ -19,11 +19,26 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
       - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
         with:
           version: '0.6.1'
           python-version: ${{ matrix.python }}
           enable-cache: true
       - run: uv sync --locked
+      - name: Validate Git hooks
+        run: uv run --locked pre-commit validate-config
       - run: make check
       - run: make build
+      - name: Smoke-test the installed wheel
+        shell: bash
+        run: |
+          uv export --locked --no-dev --no-emit-project --output-file "$RUNNER_TEMP/runtime-requirements.txt"
+          uv venv "$RUNNER_TEMP/wheel-smoke"
+          uv pip install --python "$RUNNER_TEMP/wheel-smoke/bin/python" -r "$RUNNER_TEMP/runtime-requirements.txt" dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/wheel-smoke/bin/time-to-spare" > demo-output.json
+          "$RUNNER_TEMP/wheel-smoke/bin/python" -c 'import json; from time_to_spare.http.app import create_app; data = json.load(open("demo-output.json")); assert data["synthetic"] is True; assert data["result"]["plans"]; assert create_app().title'

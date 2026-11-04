@@ -4,7 +4,7 @@ from datetime import UTC, datetime, timedelta
 
 from time_to_spare.domain.models import Constraints, OpeningWindow, Place, Route, Snapshot
 
-DEMO_NOTICE = "DEMO: fikcyjne miejsca, ceny i trasy. Nie używaj do nawigacji."
+DEMO_NOTICE = "DEMO: fictional places, prices and routes. Do not use for navigation."
 DEMO_START = datetime(2030, 6, 11, 15, 40, tzinfo=UTC)
 
 
@@ -14,7 +14,7 @@ def demo_snapshot() -> Snapshot:
     places = (
         Place(
             "garden",
-            "Ogród demonstracyjny",
+            "Demo garden",
             1200,
             0,
             (opened,),
@@ -25,7 +25,7 @@ def demo_snapshot() -> Snapshot:
         ),
         Place(
             "cafe",
-            "Kawiarnia demonstracyjna",
+            "Demo cafe",
             1500,
             2500,
             (opened,),
@@ -36,7 +36,7 @@ def demo_snapshot() -> Snapshot:
         ),
         Place(
             "gallery",
-            "Galeria demonstracyjna",
+            "Demo gallery",
             1800,
             3000,
             (opened,),
