@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from itertools import permutations
 
-from jeszcze_zdaze.domain.models import Constraints, Place, Plan, Snapshot, Stop, instant
-from jeszcze_zdaze.planning.validation import validate_plan
+from time_to_spare.domain.models import Constraints, Place, Plan, Snapshot, Stop, instant
+from time_to_spare.planning.validation import validate_plan
 
 
 @dataclass(frozen=True)

@@ -4,10 +4,10 @@ from datetime import UTC, datetime, timedelta
 import pytest
 from fastapi.testclient import TestClient
 
-from jeszcze_zdaze.domain.models import OpeningWindow, checked_local
-from jeszcze_zdaze.http.app import create_app
-from jeszcze_zdaze.infrastructure.demo import demo_request, demo_snapshot
-from jeszcze_zdaze.planning.solver import schedule
+from time_to_spare.domain.models import OpeningWindow, checked_local
+from time_to_spare.http.app import create_app
+from time_to_spare.infrastructure.demo import demo_request, demo_snapshot
+from time_to_spare.planning.solver import schedule
 
 
 def test_nonexistent_local_time_rejected() -> None:

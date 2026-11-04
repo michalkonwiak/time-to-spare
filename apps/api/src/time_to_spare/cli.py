@@ -3,8 +3,8 @@
 import json
 from dataclasses import asdict
 
-from jeszcze_zdaze.infrastructure.demo import DEMO_NOTICE, DEMO_START, demo_request, demo_snapshot
-from jeszcze_zdaze.planning.solver import solve
+from time_to_spare.infrastructure.demo import DEMO_NOTICE, DEMO_START, demo_request, demo_snapshot
+from time_to_spare.planning.solver import solve
 
 
 def main() -> None:

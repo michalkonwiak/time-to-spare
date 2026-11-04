@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from jeszcze_zdaze.http.app import create_app
+from time_to_spare.http.app import create_app
 
 
 def main() -> None:

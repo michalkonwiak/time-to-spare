@@ -1,4 +1,4 @@
-# Jeszcze zdążę
+# Time to Spare
 
 Deterministic short-trip planning with explicit return buffers and evidence.
 
@@ -23,9 +23,9 @@ The fixture clock is 2030-06-11 17:40 Europe/Warsaw; changing its date is not
 requesting a real itinerary. Both endpoints are stateless and fixture-only.
 
 ```sh
-curl -s http://127.0.0.1:8000/api/v1/demo/request > /tmp/zdaze-request.json
+curl -s http://127.0.0.1:8000/api/v1/demo/request > /tmp/time-to-spare-request.json
 curl -s http://127.0.0.1:8000/api/v1/demo/plan \
-  -H 'Content-Type: application/json' --data-binary @/tmp/zdaze-request.json
+  -H 'Content-Type: application/json' --data-binary @/tmp/time-to-spare-request.json
 ```
 
 ## Quality gates
@@ -43,7 +43,7 @@ small commits; never commit `.env`, API keys, caches or `.venv`.
 
 ## Architecture
 
-`apps/api/src/jeszcze_zdaze/domain` contains immutable standard-library values.
+`apps/api/src/time_to_spare/domain` contains immutable standard-library values.
 `planning/solver.py` enumerates up to three stops from a maximum of 20 candidates.
 `planning/validation.py` independently checks the final artifact.
 `infrastructure/demo.py` supplies an explicit directed synthetic route matrix.

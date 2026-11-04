@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "jeszcze-zdaze"
+name = "time-to-spare"
 version = "0.1.0"
 description = "Evidence-first short-trip planning with a deterministic feasibility engine"
 readme = "README.md"
@@ -11,7 +11,7 @@ requires-python = ">=3.12,<3.15"
 dependencies = ["fastapi>=0.115,<1", "pydantic>=2.10,<3", "uvicorn>=0.34,<1"]
 
 [project.scripts]
-jeszcze-zdaze = "jeszcze_zdaze.cli:main"
+time-to-spare = "time_to_spare.cli:main"
 
 [dependency-groups]
 dev = [
@@ -25,7 +25,7 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["apps/api/src/jeszcze_zdaze"]
+packages = ["apps/api/src/time_to_spare"]
 
 [tool.ruff]
 target-version = "py312"
@@ -47,7 +47,7 @@ filterwarnings = ["error"]
 
 [tool.coverage.run]
 branch = true
-source = ["jeszcze_zdaze"]
+source = ["time_to_spare"]
 
 [tool.coverage.report]
 show_missing = true

@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from jeszcze_zdaze.cli import main
+from time_to_spare.cli import main
 
 
 def test_cli_is_explicitly_synthetic_and_returns_plans(capsys: pytest.CaptureFixture[str]) -> None:

@@ -2,7 +2,7 @@
 
 from datetime import timedelta
 
-from jeszcze_zdaze.domain.models import Constraints, Plan, Snapshot
+from time_to_spare.domain.models import Constraints, Plan, Snapshot
 
 
 def validate_plan(plan: Plan, request: Constraints, data: Snapshot) -> tuple[str, ...]:

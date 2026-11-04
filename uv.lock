@@ -392,7 +392,7 @@ wheels = [
 ]
 
 [[package]]
-name = "jeszcze-zdaze"
+name = "time-to-spare"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

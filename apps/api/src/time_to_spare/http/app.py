@@ -7,9 +7,9 @@ from zoneinfo import ZoneInfoNotFoundError
 from fastapi import FastAPI
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from jeszcze_zdaze.domain.models import Constraints, DeadlineType, checked_local
-from jeszcze_zdaze.infrastructure.demo import DEMO_NOTICE, DEMO_START, demo_snapshot
-from jeszcze_zdaze.planning.solver import PlanningResult, solve
+from time_to_spare.domain.models import Constraints, DeadlineType, checked_local
+from time_to_spare.infrastructure.demo import DEMO_NOTICE, DEMO_START, demo_snapshot
+from time_to_spare.planning.solver import PlanningResult, solve
 
 
 class DemoRequest(BaseModel):
@@ -56,7 +56,7 @@ class DemoResponse(BaseModel):
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="Jeszcze zdążę — synthetic demo", version="0.1.0", description=DEMO_NOTICE)
+    app = FastAPI(title="Time to Spare — synthetic demo", version="0.1.0", description=DEMO_NOTICE)
 
     @app.get("/health/live")
     def health() -> dict[str, str]:

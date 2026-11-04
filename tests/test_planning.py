@@ -5,10 +5,10 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from jeszcze_zdaze.domain.models import DeadlineType, OpeningWindow
-from jeszcze_zdaze.infrastructure.demo import DEMO_START, demo_request, demo_snapshot
-from jeszcze_zdaze.planning.solver import schedule, solve
-from jeszcze_zdaze.planning.validation import validate_plan
+from time_to_spare.domain.models import DeadlineType, OpeningWindow
+from time_to_spare.infrastructure.demo import DEMO_START, demo_request, demo_snapshot
+from time_to_spare.planning.solver import schedule, solve
+from time_to_spare.planning.validation import validate_plan
 
 
 def test_demo_has_distinct_valid_options() -> None:

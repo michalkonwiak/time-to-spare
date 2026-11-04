@@ -3,7 +3,7 @@
 Status: accepted for this implementation stage.
 
 The surrounding repository is a portfolio with unrelated pending changes.
-This project therefore has an independent Git repository in `jeszcze-zdaze/`.
+This project therefore has an independent Git repository in `time-to-spare/`.
 Do not add it as a submodule or stage parent-repository changes. It can later be
 moved unchanged to a sibling folder and published to a dedicated remote.
 

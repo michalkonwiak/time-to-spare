@@ -1,10 +1,10 @@
-# Jeszcze zdążę — specyfikacja produktu i implementacji
+# Time to Spare — specyfikacja produktu i implementacji
 
 **Wersja dokumentu:** 1.0<br>
 **Data:** 2026-11-04<br>
 **Właściciel produktu:** Michał<br>
 **Status:** specyfikacja do implementacji; produkt, integracje i wyniki nie zostały jeszcze zwalidowane<br>
-**Robocza nazwa repozytorium:** `jeszcze-zdaze`<br>
+**Robocza nazwa repozytorium:** `time-to-spare`<br>
 **Język produktu:** polski w MVP, struktura przygotowana na angielski<br>
 **Charakter projektu:** open source, aplikacja webowa mobile-first, backend Python, produkt wykorzystujący AI i deterministyczne planowanie
 
@@ -31,7 +31,7 @@ Pierwsza odpowiedź agenta po przeczytaniu specyfikacji powinna zawierać: rozpo
 
 ## 1. Produkt w jednym zdaniu
 
-**Jeszcze zdążę pomaga wybrać i przeżyć krótkie wyjście w mieście, które mieści się w dostępnym czasie, budżecie i możliwościach użytkownika oraz kończy się powrotem do wskazanego miejsca przed ustaloną godziną.**
+**Time to Spare pomaga wybrać i przeżyć krótkie wyjście w mieście, które mieści się w dostępnym czasie, budżecie i możliwościach użytkownika oraz kończy się powrotem do wskazanego miejsca przed ustaloną godziną.**
 
 Przykład potrzeby:
 
@@ -336,7 +336,7 @@ LangGraph nie zastępuje kolejki zadań. Celery dostarcza zadanie, LangGraph org
 ### 7.3. Struktura docelowego repozytorium
 
 ```text
-apps/api/src/jeszcze_zdaze/
+apps/api/src/time_to_spare/
   domain/           # constraints, time, money, itinerary, evidence
   application/      # use cases, authorization, orchestration
   planning/         # candidate search, solver, independent validator

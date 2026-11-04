@@ -2,7 +2,7 @@
 
 from datetime import UTC, datetime, timedelta
 
-from jeszcze_zdaze.domain.models import Constraints, OpeningWindow, Place, Route, Snapshot
+from time_to_spare.domain.models import Constraints, OpeningWindow, Place, Route, Snapshot
 
 DEMO_NOTICE = "DEMO: fikcyjne miejsca, ceny i trasy. Nie używaj do nawigacji."
 DEMO_START = datetime(2030, 6, 11, 15, 40, tzinfo=UTC)

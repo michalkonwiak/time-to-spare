@@ -18,9 +18,9 @@ typecheck:
 test:
 	$(UV) run --locked pytest --cov --cov-report=term-missing
 demo:
-	$(UV) run --locked jeszcze-zdaze
+	$(UV) run --locked time-to-spare
 dev:
-	$(UV) run --locked uvicorn jeszcze_zdaze.http.app:create_app --factory --host 127.0.0.1 --port 8000 --reload
+	$(UV) run --locked uvicorn time_to_spare.http.app:create_app --factory --host 127.0.0.1 --port 8000 --reload
 contract:
 	$(UV) run --locked python scripts/export_openapi.py
 build:
