@@ -38,7 +38,7 @@ curl -s http://127.0.0.1:8000/api/v1/demo/plan \
 - `make build` builds a typed installable package, including its demo CLI.
 
 `make check` runs lint, formatting checks, type checks, coverage and contract checks.
-`make format` applies formatting fixes. Use feature branches under `codex/` and
+`make format` applies formatting fixes. Use feature branches under `feat/` and
 small commits; never commit `.env`, API keys, caches or `.venv`.
 
 ## Architecture
