@@ -1,0 +1,372 @@
+{
+  "components": {
+    "schemas": {
+      "DeadlineType": {
+        "enum": [
+          "departure",
+          "arrive_by"
+        ],
+        "title": "DeadlineType",
+        "type": "string"
+      },
+      "DemoRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "avoid_stairs": {
+            "default": false,
+            "title": "Avoid Stairs",
+            "type": "boolean"
+          },
+          "budget_minor": {
+            "default": 4500,
+            "maximum": 100000.0,
+            "minimum": 0.0,
+            "title": "Budget Minor",
+            "type": "integer"
+          },
+          "deadline": {
+            "default": "2030-06-11T19:40:00+02:00",
+            "format": "date-time",
+            "title": "Deadline",
+            "type": "string"
+          },
+          "deadline_type": {
+            "$ref": "#/components/schemas/DeadlineType",
+            "default": "departure"
+          },
+          "interests": {
+            "items": {
+              "enum": [
+                "food",
+                "walk",
+                "art"
+              ],
+              "type": "string"
+            },
+            "maxItems": 3,
+            "title": "Interests",
+            "type": "array"
+          },
+          "max_walk_minutes": {
+            "default": 60,
+            "maximum": 180.0,
+            "minimum": 0.0,
+            "title": "Max Walk Minutes",
+            "type": "integer"
+          },
+          "pace": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "relaxed"
+            ],
+            "title": "Pace",
+            "type": "string"
+          },
+          "starts_at": {
+            "default": "2030-06-11T17:40:00+02:00",
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          },
+          "timezone": {
+            "default": "Europe/Warsaw",
+            "title": "Timezone",
+            "type": "string"
+          }
+        },
+        "title": "DemoRequest",
+        "type": "object"
+      },
+      "DemoResponse": {
+        "properties": {
+          "fixture_clock": {
+            "default": "2030-06-11T15:40:00Z",
+            "format": "date-time",
+            "title": "Fixture Clock",
+            "type": "string"
+          },
+          "notice": {
+            "default": "DEMO: fikcyjne miejsca, ceny i trasy. Nie używaj do nawigacji.",
+            "title": "Notice",
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PlanningResult"
+          },
+          "synthetic": {
+            "const": true,
+            "default": true,
+            "title": "Synthetic",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "DemoResponse",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Plan": {
+        "properties": {
+          "return_at": {
+            "format": "date-time",
+            "title": "Return At",
+            "type": "string"
+          },
+          "route_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Route Evidence Ids",
+            "type": "array"
+          },
+          "slack_seconds": {
+            "title": "Slack Seconds",
+            "type": "integer"
+          },
+          "snapshot_id": {
+            "title": "Snapshot Id",
+            "type": "string"
+          },
+          "stops": {
+            "items": {
+              "$ref": "#/components/schemas/Stop"
+            },
+            "title": "Stops",
+            "type": "array"
+          },
+          "total_cost_minor": {
+            "title": "Total Cost Minor",
+            "type": "integer"
+          },
+          "walk_seconds": {
+            "title": "Walk Seconds",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "snapshot_id",
+          "stops",
+          "return_at",
+          "total_cost_minor",
+          "walk_seconds",
+          "slack_seconds",
+          "route_evidence_ids"
+        ],
+        "title": "Plan",
+        "type": "object"
+      },
+      "PlanningResult": {
+        "properties": {
+          "plans": {
+            "items": {
+              "$ref": "#/components/schemas/Plan"
+            },
+            "title": "Plans",
+            "type": "array"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "plans"
+        ],
+        "title": "PlanningResult",
+        "type": "object"
+      },
+      "Stop": {
+        "properties": {
+          "arrival": {
+            "format": "date-time",
+            "title": "Arrival",
+            "type": "string"
+          },
+          "cost_minor": {
+            "title": "Cost Minor",
+            "type": "integer"
+          },
+          "ends_at": {
+            "format": "date-time",
+            "title": "Ends At",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "place_id": {
+            "title": "Place Id",
+            "type": "string"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "place_id",
+          "arrival",
+          "starts_at",
+          "ends_at",
+          "cost_minor",
+          "evidence_ids"
+        ],
+        "title": "Stop",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "DEMO: fikcyjne miejsca, ceny i trasy. Nie używaj do nawigacji.",
+    "title": "Jeszcze zdążę — synthetic demo",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/demo/plan": {
+      "post": {
+        "operationId": "plan_api_v1_demo_plan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Plan"
+      }
+    },
+    "/api/v1/demo/request": {
+      "get": {
+        "operationId": "example_api_v1_demo_request_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoRequest"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Example"
+      }
+    },
+    "/health/live": {
+      "get": {
+        "operationId": "health_health_live_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Health Health Live Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health"
+      }
+    }
+  }
+}
