@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "id": "synthetic-city-v1",
+  "synthetic": true,
+  "timezone": "Europe/Warsaw",
+  "currency": "PLN",
+  "fixture_clock": "2030-06-11T15:40:00+00:00",
+  "valid_until": "2030-06-11T20:40:00+00:00",
+  "return_point": {
+    "id": "station",
+    "name": "Demo station entrance"
+  },
+  "places": [
+    {
+      "id": "garden",
+      "name": "Demo garden",
+      "visit_seconds": 1200,
+      "cost_upper_minor": 0,
+      "windows": [
+        {
+          "opens_at": "2030-06-11T13:40:00+00:00",
+          "closes_at": "2030-06-11T19:40:00+00:00",
+          "last_admission": null
+        }
+      ],
+      "evidence_ids": [
+        "fixture:garden:v1"
+      ],
+      "valid_until": "2030-06-11T20:40:00+00:00",
+      "categories": [
+        "walk"
+      ],
+      "step_free": true,
+      "active": true
+    },
+    {
+      "id": "cafe",
+      "name": "Demo cafe",
+      "visit_seconds": 1500,
+      "cost_upper_minor": 2500,
+      "windows": [
+        {
+          "opens_at": "2030-06-11T13:40:00+00:00",
+          "closes_at": "2030-06-11T19:40:00+00:00",
+          "last_admission": null
+        }
+      ],
+      "evidence_ids": [
+        "fixture:cafe:v1"
+      ],
+      "valid_until": "2030-06-11T20:40:00+00:00",
+      "categories": [
+        "food"
+      ],
+      "step_free": true,
+      "active": true
+    },
+    {
+      "id": "gallery",
+      "name": "Demo gallery",
+      "visit_seconds": 1800,
+      "cost_upper_minor": 3000,
+      "windows": [
+        {
+          "opens_at": "2030-06-11T13:40:00+00:00",
+          "closes_at": "2030-06-11T19:40:00+00:00",
+          "last_admission": null
+        }
+      ],
+      "evidence_ids": [
+        "fixture:gallery:v1"
+      ],
+      "valid_until": "2030-06-11T20:40:00+00:00",
+      "categories": [
+        "art"
+      ],
+      "step_free": null,
+      "active": true
+    }
+  ],
+  "routes": [
+    {
+      "origin": "station",
+      "destination": "station",
+      "base_seconds": 0,
+      "evidence_id": "fixture:route:station:station",
+      "step_free": true
+    },
+    {
+      "origin": "station",
+      "destination": "garden",
+      "base_seconds": 600,
+      "evidence_id": "fixture:route:station:garden",
+      "step_free": true
+    },
+    {
+      "origin": "station",
+      "destination": "cafe",
+      "base_seconds": 900,
+      "evidence_id": "fixture:route:station:cafe",
+      "step_free": true
+    },
+    {
+      "origin": "station",
+      "destination": "gallery",
+      "base_seconds": 1200,
+      "evidence_id": "fixture:route:station:gallery",
+      "step_free": true
+    },
+    {
+      "origin": "garden",
+      "destination": "station",
+      "base_seconds": 660,
+      "evidence_id": "fixture:route:garden:station",
+      "step_free": true
+    },
+    {
+      "origin": "garden",
+      "destination": "garden",
+      "base_seconds": 0,
+      "evidence_id": "fixture:route:garden:garden",
+      "step_free": true
+    },
+    {
+      "origin": "garden",
+      "destination": "cafe",
+      "base_seconds": 420,
+      "evidence_id": "fixture:route:garden:cafe",
+      "step_free": true
+    },
+    {
+      "origin": "garden",
+      "destination": "gallery",
+      "base_seconds": 720,
+      "evidence_id": "fixture:route:garden:gallery",
+      "step_free": true
+    },
+    {
+      "origin": "cafe",
+      "destination": "station",
+      "base_seconds": 960,
+      "evidence_id": "fixture:route:cafe:station",
+      "step_free": true
+    },
+    {
+      "origin": "cafe",
+      "destination": "garden",
+      "base_seconds": 480,
+      "evidence_id": "fixture:route:cafe:garden",
+      "step_free": true
+    },
+    {
+      "origin": "cafe",
+      "destination": "cafe",
+      "base_seconds": 0,
+      "evidence_id": "fixture:route:cafe:cafe",
+      "step_free": true
+    },
+    {
+      "origin": "cafe",
+      "destination": "gallery",
+      "base_seconds": 600,
+      "evidence_id": "fixture:route:cafe:gallery",
+      "step_free": true
+    },
+    {
+      "origin": "gallery",
+      "destination": "station",
+      "base_seconds": 1260,
+      "evidence_id": "fixture:route:gallery:station",
+      "step_free": true
+    },
+    {
+      "origin": "gallery",
+      "destination": "garden",
+      "base_seconds": 780,
+      "evidence_id": "fixture:route:gallery:garden",
+      "step_free": true
+    },
+    {
+      "origin": "gallery",
+      "destination": "cafe",
+      "base_seconds": 660,
+      "evidence_id": "fixture:route:gallery:cafe",
+      "step_free": true
+    },
+    {
+      "origin": "gallery",
+      "destination": "gallery",
+      "base_seconds": 0,
+      "evidence_id": "fixture:route:gallery:gallery",
+      "step_free": true
+    }
+  ],
+  "evidence": [
+    {
+      "id": "fixture:cafe:v1",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:gallery:v1",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:garden:v1",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:cafe:cafe",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:cafe:gallery",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:cafe:garden",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:cafe:station",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:gallery:cafe",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:gallery:gallery",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:gallery:garden",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:gallery:station",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:garden:cafe",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:garden:gallery",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:garden:garden",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:garden:station",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:station:cafe",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:station:gallery",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:station:garden",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    },
+    {
+      "id": "fixture:route:station:station",
+      "description": "Fictional fixture for deterministic planning tests; not a real-world source.",
+      "kind": "synthetic",
+      "verified_at": "2030-06-11T15:40:00+00:00",
+      "valid_until": "2030-06-11T20:40:00+00:00"
+    }
+  ]
+}

@@ -8,7 +8,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from time_to_spare.domain.models import Constraints, DeadlineType, checked_local
-from time_to_spare.infrastructure.demo import DEMO_NOTICE, DEMO_START, demo_snapshot
+from time_to_spare.infrastructure.citypack import CityPack
+from time_to_spare.infrastructure.demo import DEMO_NOTICE, DEMO_START, demo_citypack, demo_snapshot
 from time_to_spare.planning.solver import PlanningResult, solve
 
 
@@ -48,11 +49,25 @@ class DemoRequest(BaseModel):
         )
 
 
+class PlanningContext(BaseModel):
+    starts_at: datetime
+    deadline: datetime
+    deadline_type: DeadlineType
+    timezone: str
+    site_deadline: datetime
+    plan_deadline: datetime
+    boarding_seconds: int
+    reserve_seconds: int
+    budget_minor: int
+    return_point_name: str
+
+
 class DemoResponse(BaseModel):
     synthetic: Literal[True] = True
     notice: str = DEMO_NOTICE
     fixture_clock: datetime = DEMO_START
     result: PlanningResult
+    context: PlanningContext
 
 
 def create_app() -> FastAPI:
@@ -66,9 +81,32 @@ def create_app() -> FastAPI:
     def example() -> DemoRequest:
         return DemoRequest(starts_at=datetime.fromisoformat("2030-06-11T17:40:00+02:00"))
 
+    @app.get("/api/v1/demo/catalog", response_model=CityPack)
+    def catalog() -> CityPack:
+        return demo_citypack()
+
     @app.post("/api/v1/demo/plan", response_model=DemoResponse)
     def plan(request: DemoRequest) -> DemoResponse:
-        result = solve(request.to_domain(), demo_snapshot(), now=DEMO_START)
-        return DemoResponse(result=result)
+        constraints = request.to_domain()
+        result = solve(constraints, demo_snapshot(), now=DEMO_START)
+        return DemoResponse(
+            result=result,
+            context=PlanningContext(
+                starts_at=constraints.starts_at,
+                deadline=constraints.deadline,
+                deadline_type=constraints.deadline_type,
+                timezone=request.timezone,
+                site_deadline=constraints.site_deadline,
+                plan_deadline=constraints.plan_deadline,
+                boarding_seconds=(
+                    constraints.boarding_seconds
+                    if constraints.deadline_type == DeadlineType.DEPARTURE
+                    else 0
+                ),
+                reserve_seconds=constraints.reserve_seconds,
+                budget_minor=constraints.budget_minor,
+                return_point_name=demo_citypack().return_point.name,
+            ),
+        )
 
     return app

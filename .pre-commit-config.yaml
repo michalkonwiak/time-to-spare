@@ -21,9 +21,15 @@ repos:
         pass_filenames: false
         always_run: true
       - id: pre-push-checks
-        name: Tests, API contract and package build
-        entry: make check build
+        name: Backend, frontend, contracts, builds and browser tests
+        entry: make check-all
         language: system
         pass_filenames: false
         always_run: true
         stages: [pre-push]
+      - id: web-checks
+        name: Frontend lint and type checking
+        entry: npm --prefix apps/web run check:static
+        language: system
+        pass_filenames: false
+        files: ^apps/web/

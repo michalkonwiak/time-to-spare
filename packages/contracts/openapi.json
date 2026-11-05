@@ -1,6 +1,89 @@
 {
   "components": {
     "schemas": {
+      "CityPack": {
+        "additionalProperties": false,
+        "properties": {
+          "currency": {
+            "const": "PLN",
+            "title": "Currency",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "maxItems": 500,
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "fixture_clock": {
+            "format": "date-time",
+            "title": "Fixture Clock",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "places": {
+            "items": {
+              "$ref": "#/components/schemas/PackPlace"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Places",
+            "type": "array"
+          },
+          "return_point": {
+            "$ref": "#/components/schemas/ReturnPoint"
+          },
+          "routes": {
+            "items": {
+              "$ref": "#/components/schemas/PackRoute"
+            },
+            "maxItems": 441,
+            "title": "Routes",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": 1,
+            "title": "Schema Version",
+            "type": "integer"
+          },
+          "synthetic": {
+            "const": true,
+            "title": "Synthetic",
+            "type": "boolean"
+          },
+          "timezone": {
+            "title": "Timezone",
+            "type": "string"
+          },
+          "valid_until": {
+            "format": "date-time",
+            "title": "Valid Until",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "id",
+          "synthetic",
+          "timezone",
+          "currency",
+          "fixture_clock",
+          "valid_until",
+          "return_point",
+          "evidence",
+          "places",
+          "routes"
+        ],
+        "title": "CityPack",
+        "type": "object"
+      },
       "DeadlineType": {
         "enum": [
           "departure",
@@ -80,6 +163,9 @@
       },
       "DemoResponse": {
         "properties": {
+          "context": {
+            "$ref": "#/components/schemas/PlanningContext"
+          },
           "fixture_clock": {
             "default": "2030-06-11T15:40:00Z",
             "format": "date-time",
@@ -102,9 +188,50 @@
           }
         },
         "required": [
-          "result"
+          "result",
+          "context"
         ],
         "title": "DemoResponse",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "const": "synthetic",
+            "default": "synthetic",
+            "title": "Kind",
+            "type": "string"
+          },
+          "valid_until": {
+            "format": "date-time",
+            "title": "Valid Until",
+            "type": "string"
+          },
+          "verified_at": {
+            "format": "date-time",
+            "title": "Verified At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "description",
+          "verified_at",
+          "valid_until"
+        ],
+        "title": "Evidence",
         "type": "object"
       },
       "HTTPValidationError": {
@@ -118,6 +245,152 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "PackPlace": {
+        "additionalProperties": false,
+        "properties": {
+          "active": {
+            "default": true,
+            "title": "Active",
+            "type": "boolean"
+          },
+          "categories": {
+            "default": [],
+            "items": {
+              "enum": [
+                "walk",
+                "food",
+                "art"
+              ],
+              "type": "string"
+            },
+            "title": "Categories",
+            "type": "array"
+          },
+          "cost_upper_minor": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Upper Minor"
+          },
+          "evidence_ids": {
+            "items": {
+              "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "step_free": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step Free"
+          },
+          "valid_until": {
+            "format": "date-time",
+            "title": "Valid Until",
+            "type": "string"
+          },
+          "visit_seconds": {
+            "exclusiveMinimum": 0.0,
+            "maximum": 10800.0,
+            "title": "Visit Seconds",
+            "type": "integer"
+          },
+          "windows": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Window"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Windows"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "visit_seconds",
+          "cost_upper_minor",
+          "windows",
+          "evidence_ids",
+          "valid_until"
+        ],
+        "title": "PackPlace",
+        "type": "object"
+      },
+      "PackRoute": {
+        "additionalProperties": false,
+        "properties": {
+          "base_seconds": {
+            "minimum": 0.0,
+            "title": "Base Seconds",
+            "type": "integer"
+          },
+          "destination": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Destination",
+            "type": "string"
+          },
+          "evidence_id": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "origin": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Origin",
+            "type": "string"
+          },
+          "step_free": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step Free"
+          }
+        },
+        "required": [
+          "origin",
+          "destination",
+          "base_seconds",
+          "evidence_id"
+        ],
+        "title": "PackRoute",
         "type": "object"
       },
       "Plan": {
@@ -170,6 +443,67 @@
         "title": "Plan",
         "type": "object"
       },
+      "PlanningContext": {
+        "properties": {
+          "boarding_seconds": {
+            "title": "Boarding Seconds",
+            "type": "integer"
+          },
+          "budget_minor": {
+            "title": "Budget Minor",
+            "type": "integer"
+          },
+          "deadline": {
+            "format": "date-time",
+            "title": "Deadline",
+            "type": "string"
+          },
+          "deadline_type": {
+            "$ref": "#/components/schemas/DeadlineType"
+          },
+          "plan_deadline": {
+            "format": "date-time",
+            "title": "Plan Deadline",
+            "type": "string"
+          },
+          "reserve_seconds": {
+            "title": "Reserve Seconds",
+            "type": "integer"
+          },
+          "return_point_name": {
+            "title": "Return Point Name",
+            "type": "string"
+          },
+          "site_deadline": {
+            "format": "date-time",
+            "title": "Site Deadline",
+            "type": "string"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          },
+          "timezone": {
+            "title": "Timezone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "starts_at",
+          "deadline",
+          "deadline_type",
+          "timezone",
+          "site_deadline",
+          "plan_deadline",
+          "boarding_seconds",
+          "reserve_seconds",
+          "budget_minor",
+          "return_point_name"
+        ],
+        "title": "PlanningContext",
+        "type": "object"
+      },
       "PlanningResult": {
         "properties": {
           "plans": {
@@ -195,6 +529,28 @@
           "plans"
         ],
         "title": "PlanningResult",
+        "type": "object"
+      },
+      "ReturnPoint": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[a-z][a-z0-9:_-]{0,99}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "ReturnPoint",
         "type": "object"
       },
       "Stop": {
@@ -280,6 +636,39 @@
         ],
         "title": "ValidationError",
         "type": "object"
+      },
+      "Window": {
+        "additionalProperties": false,
+        "properties": {
+          "closes_at": {
+            "format": "date-time",
+            "title": "Closes At",
+            "type": "string"
+          },
+          "last_admission": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Admission"
+          },
+          "opens_at": {
+            "format": "date-time",
+            "title": "Opens At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "opens_at",
+          "closes_at"
+        ],
+        "title": "Window",
+        "type": "object"
       }
     }
   },
@@ -290,6 +679,24 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/demo/catalog": {
+      "get": {
+        "operationId": "catalog_api_v1_demo_catalog_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CityPack"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Catalog"
+      }
+    },
     "/api/v1/demo/plan": {
       "post": {
         "operationId": "plan_api_v1_demo_plan_post",
